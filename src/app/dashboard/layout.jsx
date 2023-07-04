@@ -19,6 +19,7 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 const urlSegment = '/dashboard'
 
 const navigation = [
+  { name: 'Home', href: '/', icon: HomeIcon, current: false },
   { name: 'Dashboard', href: urlSegment, icon: HomeIcon, current: true },
   { name: 'Team', href: urlSegment + '/team', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
