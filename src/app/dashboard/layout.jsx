@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useState } from 'react'
+import {Fragment, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -16,6 +16,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import {useSession} from "next-auth/react";
+import Link from "next/link";
 
 const urlSegment = '/dashboard'
 
@@ -108,7 +109,7 @@ export default function OneLayout({children}) {
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
-                                <a
+                                <Link
                                   href={item.href}
                                   className={classNames(
                                     item.current
@@ -125,7 +126,7 @@ export default function OneLayout({children}) {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </a>
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -191,7 +192,7 @@ export default function OneLayout({children}) {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
+                        <Link
                           href={item.href}
                           className={classNames(
                             item.current
@@ -208,7 +209,7 @@ export default function OneLayout({children}) {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

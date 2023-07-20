@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Link from "next/link";
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -111,15 +112,15 @@ export default function RootLayout({children}) {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="/api/auth/signin" className="text-sm font-semibold leading-6 text-gray-900">
+            <Link href="/api/auth/signin" className="text-sm font-semibold leading-6 text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -147,13 +148,13 @@ export default function RootLayout({children}) {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 <div className="py-6">
