@@ -2,10 +2,8 @@ import {CheckCircleIcon, InformationCircleIcon} from "@heroicons/react/20/solid"
 import {getAI} from "@/app/nzh-light/[post]/SummaryAI";
 
 let q = `https://www.nzherald.co.nz/pf/api/v3/content/fetch/content-by-id?query={%22id%22:%22Q3PAAWTFJBF7VPETXNWFC2QPNM%22}`
-
 let q2='https://api.sandbox.nzme.arcpublishing.com/content/v4/?website_url=/nz/devastating-fatal-plane-crash-at-masterton-aerodrome-prompts-major-safety-recommendations/4PYICIXPOUW5CID3QW3DRL4L54/&website=nzh';
 let q3='https://api.sandbox.nzme.arcpublishing.com/content/v4/?_id=WQKTAMH72MOQWQCUFZMH2SR6BE&website=nzh';
-
 
 let p_ = {
   _id: '4PYICIXPOUW5CID3QW3DRL4L54',
@@ -360,25 +358,6 @@ const paragraphRender = (data) => {
   })
 }
 
-// const getAI = async () => {
-//   const NLPCloudClient = require('nlpcloud');
-//   const client = new NLPCloudClient('bart-large-cnn','cfae2627264016b199d61532bc12dd5a5a7fbc90', false)
-//   client.summarization(
-//     `
-//   Pilot Arthur Dovey successfully took the two groups to the High Court at Wellington, claiming $616,500 plus GST for damages to his World War II Russian Yak-3.
-//   Dovey and another pilot were asked to open the show in March 2018 when two other aircraft were delayed because of bad weather.
-//   The plane was wrecked after Dovey landed on a grass runway and hit a cherry picker. He was not injured.
-//   The High Court heard Dovey did not have insurance for his aircraft and was entitled to expect that he would be alerted to any hazards by the display director on duty.
-//   `,
-//     'small'
-//   ).then(function (response) {
-//     console.log(response.data);
-//   }).catch(function (err) {
-//     console.error(err.response.status);
-//     console.error(err.response.data.detail);
-//   });
-// }
-
 async function getData(postId) {
   const q=`https://api.sandbox.nzme.arcpublishing.com/content/v4/?_id=${postId}&website=nzh`;
   try {
@@ -400,7 +379,8 @@ export default async function Post({params:{post:postId}}) {
     .filter(({type}) => (type==='text'))
     .map(({content}) => (content))
     .join(" ");
-  const sum = await getAI(text)
+  // const sum = await getAI(text)
+  const sum = '==temp=off=='
   // console.log('d256 p.content_elements:', p.content_elements)
   return (
     <div data-ui={'Post Page'}>
