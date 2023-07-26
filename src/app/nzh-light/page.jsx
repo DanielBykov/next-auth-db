@@ -1,20 +1,24 @@
 import Link from "next/link";
 
-const querySample = "https://www.nzherald.co.nz/pf/api/v3/content/fetch/content-feed-advanced?query={%22q%22:%22type:story%22,%22site%22:%22nzh%22,%22sort%22:%22display_date:desc%22}&_website=nzh"
-
+// const querySample = "https://www.nzherald.co.nz/pf/api/v3/content/fetch/content-feed-advanced?query={%22q%22:%22type:story%22,%22site%22:%22nzh%22,%22sort%22:%22display_date:desc%22}&_website=nzh"
+const querySample = "https://play.nzherald.co.nz/pf/api/v3/content/fetch/content-feed-advanced?query=%7B%22limit%22%3A12%2C%22q%22%3A%22type%3Astory%22%2C%22site%22%3A%22whanganui-chronicle%22%7D&d=1584&_website=nzh"
 async function getData() {
-  const res = await fetch(querySample)
+  const res = await fetch(querySample, {
+    headers: {
+      Cookie: 'arc-access=jJ7f2tbWT9jQZYwT'
+    }
+  })
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
+    console.log('d256 res:', res)
     throw new Error('Failed to fetch data')
   }
-
   return res.json()
 }
 
 export default async function ArticleList() {
   const articles = await getData()
-
+  console.log('d256 articles:', articles)
 
   return (
     <div data-ui={'OnePage'}>
