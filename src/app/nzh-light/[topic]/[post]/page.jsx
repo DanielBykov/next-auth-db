@@ -1,5 +1,6 @@
-import {CheckCircleIcon, InformationCircleIcon} from "@heroicons/react/20/solid";
-import {getAI} from "@/app/nzh-light/[post]/SummaryAI";
+import {getSumAI_NLPCloud} from "@/app/nzh-light/_components/getSummaryAI_NLPCloud";
+import {Summary} from "@/app/nzh-light/_components/Summary";
+import {Sentiment} from "@/app/nzh-light/_components/Sentiment";
 
 let q = `https://www.nzherald.co.nz/pf/api/v3/content/fetch/content-by-id?query={%22id%22:%22Q3PAAWTFJBF7VPETXNWFC2QPNM%22}`
 let q2='https://api.sandbox.nzme.arcpublishing.com/content/v4/?website_url=/nz/devastating-fatal-plane-crash-at-masterton-aerodrome-prompts-major-safety-recommendations/4PYICIXPOUW5CID3QW3DRL4L54/&website=nzh';
@@ -379,7 +380,7 @@ export default async function Post({params:{post:postId}}) {
     .filter(({type}) => (type==='text'))
     .map(({content}) => (content))
     .join(" ");
-  // const sum = await getAI(text)
+  // const sum = await getSumAI_NLPCloud(text)
   const sum = '==temp=off=='
   // console.log('d256 p.content_elements:', p.content_elements)
   return (
@@ -391,14 +392,8 @@ export default async function Post({params:{post:postId}}) {
           <p className="mt-6 text-xl leading-8">
             {p.description.basic}
           </p>
-          <div class="bg-gray-100 p-8 mt-2">
-            <div class="max-w-3xl mx-auto">
-              <h2 class="text-3xl font-bold mb-4">Summary Section (AI generated)</h2>
-              <p class="text-gray-700 mb-4">
-                {sum}
-              </p>
-            </div>
-          </div>
+          <Summary text={text}/>
+          <Sentiment text={text}/>
 
           <div className="mt-10 max-w-2xl">
             {paragraphRender(p.content_elements)}
