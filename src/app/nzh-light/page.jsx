@@ -6,4 +6,5 @@ export default async function ArticleListGlobal() {
   //     <ArticleListUi />
   //   </div>
   // )
+  //356u
 }
