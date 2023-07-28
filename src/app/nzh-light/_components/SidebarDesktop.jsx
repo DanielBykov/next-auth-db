@@ -5,6 +5,7 @@ GlobeEuropeAfricaIcon, TrophyIcon, ChatBubbleBottomCenterIcon, XMarkIcon
 } from "@heroicons/react/24/outline";
 import {useState} from "react";
 import {initTopics} from "@/app/nzh-light/_components/mock-data";
+import {usePathname} from "next/navigation";
 
 let logo = "https://www.nzherald.co.nz/pf/resources/images/fallback-promo-image.png?d=627"
 function classNames(...classes) {
@@ -13,6 +14,8 @@ function classNames(...classes) {
 const urlSegment = '/nzh-light'
 
 export const SidebarDesktop = ({navigation, teams}) => {
+  let path = usePathname()
+
   const [topics, setTopics ] = useState(initTopics)
   const [favTopics, setFavTopics ] = useState([])
   const topicClick = (item) => () => {
@@ -42,7 +45,7 @@ export const SidebarDesktop = ({navigation, teams}) => {
                   <li key={item.name}>
                     <div
                       className={classNames(
-                        item.current
+                        `/nzh-light/${item.href}` === path
                           ? 'bg-yellow-600 text-white'
                           : 'text-indigo-200 hover:text-white hover:bg-yellow-600/20',
                         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
