@@ -5,51 +5,35 @@ import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   BellIcon,
-  HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import {useSession} from "next-auth/react";
-import {SidebarDesktop} from "@/app/nzh-light/_components/SidebarDesktop";
+import {Sidebar} from "@/app/nzh-light/_components/Sidebar";
+import {ToggleDarkTheme} from "@/app/nzh-light/_components/ToggleDarkTheme";
 
-const urlSegment = '/nzh-light'
-
-const topicFav = [
-  { name: 'Home',   href: urlSegment,             icon: HomeIcon, current: true },
-  { name: 'Sport',  href: urlSegment + '/sport',  icon: UsersIcon, current: false },
-]
-const topics = [
-  { name: 'Home',   href: urlSegment,             icon: HomeIcon, current: true },
-  { name: 'Sport',  href: urlSegment + '/sport',  icon: UsersIcon, current: false },
-  // { id: 1, name: 'World', href: 'world', initial: 'W', current: false },
-  // { id: 2, name: 'Sport', href: '#', initial: 'S', current: false },
-  // { id: 3, name: 'Opinion', href: '#', initial: 'O', current: false },
-  // { id: 4, name: 'Property', href: '#', initial: 'P', current: false },
-  // { id: 5, name: 'Crime', href: '#', initial: 'C', current: false },
-]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
 
-let logo = "https://www.nzherald.co.nz/pf/resources/images/fallback-promo-image.png?d=627"
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function OneLayout({children}) {
+export default function NZHLayout({children}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // const systemDef = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const [isDark, setIsDark ] = useState(false)
 
   const { data: session } = useSession()
   const userName = session?.user?.name
   const userImage = session?.user?.image
 
   return (
-    <>
-      <div>
+    <div className={classNames(isDark && "dark", "h-full")}>
+      <div className="h-full dark:bg-gray-500">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -91,8 +75,7 @@ export default function OneLayout({children}) {
                       </button>
                     </div>
                   </Transition.Child>
-                  {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <SidebarDesktop navigation={topicFav} teams={topics}/>
+                  <Sidebar />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -101,10 +84,10 @@ export default function OneLayout({children}) {
 
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        <SidebarDesktop navigation={topicFav} teams={topics}/>
+          <Sidebar />
         </div>
 
-        <div className="lg:pl-72">
+        <div className="lg:pl-72 h-fit">
           <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
             <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
@@ -132,10 +115,13 @@ export default function OneLayout({children}) {
                 />
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
-                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+
+                <ToggleDarkTheme isDark={isDark} setIsDark={setIsDark}/>
+
+                {/*<button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">*/}
+                {/*  <span className="sr-only">View notifications</span>*/}
+                {/*  <BellIcon className="h-6 w-6" aria-hidden="true" />*/}
+                {/*</button>*/}
 
                 {/* Separator */}
                 <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true" />
@@ -188,11 +174,11 @@ export default function OneLayout({children}) {
             </div>
           </div>
 
-          <main className="py-10">
+          <main className="py-10 bg-gray-100 dark:bg-gray-500 h-full">
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
           </main>
         </div>
       </div>
-    </>
+    </div>
   )
 }

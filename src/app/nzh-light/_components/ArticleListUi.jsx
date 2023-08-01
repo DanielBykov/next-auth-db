@@ -23,12 +23,10 @@ async function getData(topic) {
 }
 
 export const ArticleListUi = async ({topic=""}) => {
-  console.log('d256 topic:', topic)
   const articles = await getData(topic)
-  console.log('d256 articles:', articles)
   const alink = (a) => `/nzh-light/${topic}/${a.id}`
   return (
-    <ul className="flex flex-wrap gap-6">
+    <ul className="flex flex-wrap justify-center gap-6">
       {articles.map(a => (
         <li>
           <div

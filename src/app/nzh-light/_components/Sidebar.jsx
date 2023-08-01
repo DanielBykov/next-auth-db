@@ -11,7 +11,7 @@ function classNames(...classes) {
 }
 const urlSegment = '/nzh-light'
 
-export const SidebarDesktop = () => {
+export const Sidebar = () => {
   let path = usePathname()
   let currentTopicUrl = path.split('/')[2]
 
