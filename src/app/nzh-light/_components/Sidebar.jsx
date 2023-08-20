@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import {Cog6ToothIcon, XMarkIcon, PlusIcon} from "@heroicons/react/24/outline";
+import {Cog6ToothIcon, XMarkIcon, PlusIcon, UserIcon} from "@heroicons/react/24/outline";
 import {useState} from "react";
 import {initTopics} from "@/app/nzh-light/_components/mock-data";
 import {usePathname} from "next/navigation";
@@ -123,14 +123,24 @@ export const Sidebar = () => {
             </li>
             <li className="mt-auto">
               <a
-                href="#"
+                href="/nzh-light/user/profile"
+                className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
+              >
+                <UserIcon
+                  className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
+                  aria-hidden="true"
+                />
+                User Profile
+              </a>
+              <a
+                href="/nzh-light/user/settings"
                 className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
               >
                 <Cog6ToothIcon
                   className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
                   aria-hidden="true"
                 />
-                Settings
+                User Settings
               </a>
             </li>
           </ul>
