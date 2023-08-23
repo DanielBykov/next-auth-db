@@ -12,15 +12,12 @@ import {useSession} from "next-auth/react";
 import {Sidebar} from "@/app/nzh-light/_components/Sidebar";
 import {ToggleDarkTheme} from "@/app/nzh-light/_components/ToggleDarkTheme";
 import Link from "next/link";
+import {cls} from "@/app/nzh-light/_components/utils";
 
 const userNavigation = [
   { name: 'Your profile', href: '#' },
   { name: 'Sign out', href: '/api/auth/signout' },
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function NZHLayout({children}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -29,7 +26,7 @@ export default function NZHLayout({children}) {
   const [isDark, setIsDark ] = useState(false)
 
   return (
-    <div className={classNames(isDark && "dark", "h-full")}>
+    <div className={cls(isDark && "dark", "h-full")}>
       <div className="h-full dark:bg-gray-500">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -175,7 +172,7 @@ const ProfileDropdown = () => {
                   {({ active }) => (
                     <Link
                       href={item.href}
-                      className={classNames(
+                      className={cls(
                         active ? 'bg-gray-50' : '',
                         'block px-3 py-1 text-sm leading-6 text-gray-900'
                       )}

@@ -1,4 +1,12 @@
-export default function handler(req, res) {
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+
+export default async function handler(req, res) {
+
+  const session = await getServerSession(req, res, authOptions);
+  console.log('d256 session:', session)
+
+  return res.json(session)
 
   if (req.method !== "POST") {
     res.status(405).send("Method not allowed");

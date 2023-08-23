@@ -18,7 +18,7 @@ export function PersonalInfo({userData}) {
   const { data: session } = useSession()
   const userEmail = session?.user?.email
   
-  console.log('d256 userData:', userData)
+  // console.log('d256 userData++:', userData)
 
   const d = {
     firstName: 'DDD',
@@ -35,7 +35,7 @@ export function PersonalInfo({userData}) {
     const dataJson = JSON.stringify(data)
 
     const  resp = await fetch('/api/user/form-personal-info', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

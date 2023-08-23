@@ -1,20 +1,42 @@
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import {PersonalInfo} from "@/app/nzh-light/user/settings/FormPersonalInfo";
 import {prisma} from "@/lib/prisma";
+import {getSession} from "next-auth/react";
+import LogOnClientSide from "@/app/nzh-light/_components/LogOnClientSide";
+import GoogleProvider from "next-auth/providers/google";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
-export default async function UserSettings() {
 
-  const userData = await prisma.user.findUnique({
-    where: {email: "d256"}
-  })
+
+export default async function UserSettings(props) {
+
+
+
+  // const userData = await prisma.user.findUnique({
+  //   where: {email: "3573053@gmail.com"}
+  // })
+
+  // const getSession_ = await getSession()
+  const getServerSession_ = await getServerSession(authOptions)
+
+  return <pre>{JSON.stringify(getServerSession_, null, 2)}</pre>
+
+  let log = {
+    getServerSession_,
+    props
+  }
 
   return (
     <div data-ui='UserSettings'>
+
+      <LogOnClientSide label="UserSettings SS" log={log} />
+
       <h1 className="text-2xl text-slate-700 mb-3">Settings</h1>
 
       <div className="space-y-10 divide-y divide-gray-900/10">
 
-        <PersonalInfo userData={userData}/>
+        <PersonalInfo userData={0}/>
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
           <div className="px-4 sm:px-0">
@@ -238,4 +260,12 @@ export default async function UserSettings() {
 
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      d256: "dddddddddd"
+    },
+  }
 }
