@@ -5,13 +5,9 @@ import {getSession} from "next-auth/react";
 import LogOnClientSide from "@/app/nzh-light/_components/LogOnClientSide";
 import GoogleProvider from "next-auth/providers/google";
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-
-
+import {authOptions} from "@/app/api/auth/authOptions";
 
 export default async function UserSettings(props) {
-
-
 
   // const userData = await prisma.user.findUnique({
   //   where: {email: "3573053@gmail.com"}
@@ -20,7 +16,7 @@ export default async function UserSettings(props) {
   // const getSession_ = await getSession()
   const getServerSession_ = await getServerSession(authOptions)
 
-  return <pre>{JSON.stringify(getServerSession_, null, 2)}</pre>
+  return <pre className="text-gray-500">{JSON.stringify(getServerSession_, null, 2)}</pre>
 
   let log = {
     getServerSession_,

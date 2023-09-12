@@ -3,15 +3,25 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 export default async function handler(req, res) {
 
-  const session = await getServerSession(req, res, authOptions);
-  console.log('d256 session:', session)
-
-  return res.json(session)
-
-  if (req.method !== "POST") {
-    res.status(405).send("Method not allowed");
-    return;
+  const session = await getServerSession(req, res, authOptions)
+  if (session) {
+    // Signed in
+    // console.log("Session", JSON.stringify(session, null, 2))
+    return res.json(session)
+  } else {
+    // Not Signed in
+    res.status(401)
   }
+  res.end()
+
+
+
+
+
+  // if (req.method !== "POST") {
+  //   res.status(405).send("Method not allowed");
+  //   return;
+  // }
 
   // Get data submitted in request's body.
   const body = req.body
