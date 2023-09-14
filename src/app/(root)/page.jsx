@@ -1,4 +1,5 @@
 export default function HomePage() {
+  console.log('d256 HomePage:', )
   return (
     <div className="relative isolate -z-10">
       <svg

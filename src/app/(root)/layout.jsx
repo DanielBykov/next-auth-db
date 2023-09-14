@@ -1,6 +1,6 @@
-// "use client"
 import Header from "@/app/(root)/_components/Header";
 import Footer from "@/app/(root)/_components/Footer";
+import NextAuthProvider from "@/app/(root)/_components/NextAuthProvider";
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -83,18 +83,21 @@ const footerNavigation = {
 }
 
 export default function RootLayout({children}) {
+  console.log('d256 RootLayout:')
   return (
-    <div className="bg-white">
+    <NextAuthProvider>
+      <div className="bg-white">
+        <Header navigation={navigation} />
 
-      <Header navigation={navigation} />
+        <main className="isolate">
+          {children}
+        </main>
 
-      <main className="isolate">
-        {children}
-      </main>
-
-      <Footer navi={footerNavigation}/>
-
-    </div>
+        <Footer navi={footerNavigation}/>
+      </div>
+    </NextAuthProvider>
   )
 }
+
+
 

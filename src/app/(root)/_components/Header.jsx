@@ -1,10 +1,11 @@
-"use client"
+'use client'
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import {Dialog} from "@headlessui/react";
 import {useState} from "react";
 
 export default function Header({navigation}) {
+  console.log('d256 Header:')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
     <header className="bg-indigo-100 absolute inset-x-0 top-0 z-50">
